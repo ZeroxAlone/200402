@@ -8,6 +8,8 @@ Created on Wed Apr  1 18:24:48 2020
 
 import websockets
 import asyncio
+import nest_asyncio 
+nest_asyncio.apply()
 
 cs = set()
 
@@ -23,6 +25,6 @@ async def talk(websocket, path):
     except Exception as err:
         cs.remove(websocket)
 
-start_server = websockets.serve(talk, "locoalhost", 8765)
+start_server = websockets.serve(talk, "127.0.0.1", 8765)
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
